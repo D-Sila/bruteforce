@@ -1,0 +1,103 @@
+<WiFiBruteforceGUI>:
+    orientation: 'vertical'
+    padding: 10
+    spacing: 10
+
+    BoxLayout:
+        size_hint_y: None
+        height: 40
+        Label:
+            text: 'SSID:'
+            size_hint_x: 0.3
+        TextInput:
+            text: root.ssid
+            on_text: root.ssid = self.text
+            size_hint_x: 0.7
+
+    BoxLayout:
+        size_hint_y: None
+        height: 40
+        Label:
+            text: 'Min length:'
+            size_hint_x: 0.3
+        TextInput:
+            text: str(root.min_len)
+            input_filter: 'int'
+            on_text: root.min_len = int(self.text) if self.text else 8
+            size_hint_x: 0.2
+        Label:
+            text: 'Max length:'
+            size_hint_x: 0.3
+        TextInput:
+            text: str(root.max_len)
+            input_filter: 'int'
+            on_text: root.max_len = int(self.text) if self.text else 12
+            size_hint_x: 0.2
+
+    BoxLayout:
+        size_hint_y: None
+        height: 40
+        Label:
+            text: 'Charset (optional):'
+            size_hint_x: 0.3
+        TextInput:
+            text: root.charset
+            on_text: root.charset = self.text
+            size_hint_x: 0.7
+
+    BoxLayout:
+        size_hint_y: None
+        height: 40
+        Label:
+            text: 'Failures before cooldown:'
+            size_hint_x: 0.5
+        TextInput:
+            text: str(root.attempts_before_cooldown)
+            input_filter: 'int'
+            on_text: root.attempts_before_cooldown = int(self.text) if self.text else 10
+            size_hint_x: 0.5
+        Label:
+            text: 'Cooldown seconds:'
+            size_hint_x: 0.5
+        TextInput:
+            text: str(root.cooldown_sec)
+            input_filter: 'int'
+            on_text: root.cooldown_sec = int(self.text) if self.text else 300
+            size_hint_x: 0.5
+
+    BoxLayout:
+        size_hint_y: None
+        height: 40
+        Label:
+            text: 'Delay (s):'
+            size_hint_x: 0.3
+        TextInput:
+            text: str(root.delay)
+            input_filter: 'float'
+            on_text: root.delay = float(self.text) if self.text else 0.5
+            size_hint_x: 0.7
+
+    Label:
+        text: f'Status: {root.status}'
+        size_hint_y: None
+        height: 30
+
+    Label:
+        text: f'Current password: {root.current_password}'
+        size_hint_y: None
+        height: 30
+
+    Label:
+        text: f'Attempts: {root.attempts} | Failures: {root.failures}'
+        size_hint_y: None
+        height: 30
+
+    BoxLayout:
+        size_hint_y: None
+        height: 50
+        Button:
+            text: 'Start'
+            on_press: root.start_bruteforce()
+        Button:
+            text: 'Stop'
+            on_press: root.stop_bruteforce()
